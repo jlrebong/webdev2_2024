@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+
+    <div id="content"></div>
+
+
+    <script>
+
+        function getServerData() {
+            return new Promise(function(resolve,reject){
+                setTimeout(()=>{
+                    resolve('testssssssssss')    
+                }, 3000);
+            });
+        }
+
+        function onError(err) {
+            console.log(err)
+        }
+
+        function onSuccess(data) {
+            return new Promise(function(resolve,reject) {
+                resolve('Promise 2' + data)
+            })
+        }
+
+        function onSuccess2(data) {
+            console.log(data);
+        }
+
+        let result = getServerData();
+
+        result.then(onSuccess, onError)
+              .then(onSuccess2,onError)
+
+        function getMath() {
+            return new Promise(function(resolve,reject) {
+                resolve(1)
+            })
+        }
+
+        function add(data) {
+            return new Promise(function(resolve,reject) {
+                resolve(10 + data)
+            })
+        }
+
+        function multiply(data) {
+            return new Promise(function(resolve,reject) {
+                resolve(2 * data)
+            })
+        }
+
+        function subtract(data) {
+            return new Promise(function(resolve,reject) {
+                resolve(data - 8)
+            })
+        }
+
+        getMath().then(add)
+                 .then(multiply)
+                 .then(subtract)
+                 .then((data)=>{ console.log(data) })
+
+   </script>
+
+</body>
+</html>
